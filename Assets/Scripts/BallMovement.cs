@@ -13,7 +13,7 @@ public class BallMovement : MonoBehaviour {
 
    [SerializeField] private float stepDuration = 0.1f ;
    [SerializeField] private LayerMask wallsAndRoadsLayer ;
-   private const float MAX_RAY_DISTANCE = 10f ;
+   private const float MAX_RAY_DISTANCE = 100f ;
 
    public UnityAction<List<RoadTile>, float> onMoveStart ;
 
