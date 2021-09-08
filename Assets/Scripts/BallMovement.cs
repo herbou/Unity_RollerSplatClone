@@ -1,8 +1,11 @@
-﻿using UnityEngine ;
+using UnityEngine ;
 using GG.Infrastructure.Utils.Swipe ;
 using DG.Tweening ;
 using System.Collections.Generic ;
 using UnityEngine.Events ;
+
+// added this line to sort tiles by distance from the ray's origin using LINQ Queries  ( Line 50 & 51 ):
+using System.Linq ;
 
 public class BallMovement : MonoBehaviour {
    [SerializeField] private SwipeListener swipeListener ;
@@ -44,7 +47,8 @@ public class BallMovement : MonoBehaviour {
       if (canMove) {
          canMove = false ;
          // add raycast in the swipe direction (from the ball) :
-         RaycastHit[] hits = Physics.RaycastAll (transform.position, moveDirection, MAX_RAY_DISTANCE, wallsAndRoadsLayer.value) ;
+         RaycastHit[] hits = Physics.RaycastAll (transform.position, moveDirection, MAX_RAY_DISTANCE, wallsAndRoadsLayer.value)
+                                    .OrderBy (hit => hit.distance).ToArray () ; // added this line to sort tiles by distance from the ray's origin
 
          Vector3 targetPosition = transform.position ;
 
